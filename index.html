@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Subway Surfers: City Runner - 3D Endless Runner Game</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Outfit:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Game Canvas Container -->
+    <div id="game-container">
+        <!-- Three.js Canvas will be appended here -->
+
+        <!-- HUD (Heads-Up Display) -->
+        <div id="hud" class="hidden">
+            <div class="hud-top">
+                <div class="hud-card coins-card">
+                    <i class="fa-solid fa-coins coin-icon"></i>
+                    <span id="hud-coins">0</span>
+                </div>
+                <div class="hud-card score-card">
+                    <div class="score-label">SCORE</div>
+                    <div id="hud-score">000000</div>
+                    <div id="hud-multiplier" class="multiplier-badge">1x</div>
+                </div>
+                <div class="hud-card speed-card">
+                    <i class="fa-solid fa-gauge-high speed-icon"></i>
+                    <span id="hud-speed">28 MPH</span>
+                </div>
+                <div class="hud-card top-buttons">
+                    <button id="btn-hoverboard" class="hoverboard-btn" title="Use Hoverboard (Double Space / Double Tap)">
+                        <i class="fa-solid fa-bolt"></i>
+                        <span id="hoverboard-count">3</span>
+                    </button>
+                    <button id="btn-pause" class="icon-btn"><i class="fa-solid fa-pause"></i></button>
+                </div>
+            </div>
+
+            <!-- Active Skill Buttons HUD -->
+            <div id="hud-skills-bar">
+                <button id="btn-skill-dash" class="skill-btn" title="Super Sprint (Press Q)">
+                    <i class="fa-solid fa-bolt-lightning"></i>
+                    <span class="skill-key">Q</span>
+                    <span class="skill-name">SPRINT</span>
+                </button>
+                <button id="btn-skill-timewarp" class="skill-btn" title="Train Slow-Mo (Press E)">
+                    <i class="fa-solid fa-hourglass-half"></i>
+                    <span class="skill-key">E</span>
+                    <span class="skill-name">SLOW-MO</span>
+                </button>
+            </div>
+
+            <!-- Active Powerup Timers -->
+            <div id="powerup-bars">
+                <!-- Dynamically populated -->
+            </div>
+
+            <!-- Touch Controls Overlay for Mobile/Tablet -->
+            <div id="touch-controls">
+                <div class="touch-zone zone-left" id="zone-left"><i class="fa-solid fa-arrow-left"></i></div>
+                <div class="touch-center-stack">
+                    <div class="touch-zone zone-up" id="zone-up"><i class="fa-solid fa-arrow-up"></i> JUMP</div>
+                    <div class="touch-zone zone-down" id="zone-down"><i class="fa-solid fa-arrow-down"></i> SLIDE</div>
+                </div>
+                <div class="touch-zone zone-right" id="zone-right"><i class="fa-solid fa-arrow-right"></i></div>
+            </div>
+        </div>
+
+        <!-- Start / Main Menu Screen -->
+        <div id="menu-start" class="screen-overlay">
+            <div class="menu-content glass-box classic-border">
+                <div class="logo-wrapper">
+                    <h1 class="game-title classic-title">SUBWAY<br><span class="highlight-classic">SURFERS</span></h1>
+                    <p class="tagline classic-tagline">Dodge Trains, Spray Graffiti & Escape the Inspector!</p>
+                </div>
+
+                <div class="menu-stats">
+                    <div class="stat-pill"><i class="fa-solid fa-trophy"></i> HIGH SCORE: <span id="start-highscore">0</span></div>
+                    <div class="stat-pill"><i class="fa-solid fa-coins"></i> COINS: <span id="start-totalcoins">0</span></div>
+                </div>
+
+                <div class="menu-actions">
+                    <button id="btn-play" class="btn btn-primary btn-pulse">
+                        <i class="fa-solid fa-play"></i> TAP TO RUN
+                    </button>
+                    <div class="secondary-btn-row">
+                        <button id="btn-shop" class="btn btn-secondary"><i class="fa-solid fa-shirt"></i> Characters</button>
+                        <button id="btn-controls" class="btn btn-secondary"><i class="fa-solid fa-gamepad"></i> Controls</button>
+                        <button id="btn-sound-toggle" class="btn btn-secondary"><i class="fa-solid fa-volume-high" id="sound-icon"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Shop Screen -->
+        <div id="menu-shop" class="screen-overlay hidden">
+            <div class="menu-content glass-box shop-box classic-border">
+                <h2><i class="fa-solid fa-shirt"></i> CHARACTER WARDROBE</h2>
+                <div class="shop-balance">Total Gold Coins: <i class="fa-solid fa-coins"></i> <span id="shop-coins">0</span></div>
+                
+                <div class="shop-items-grid">
+                    <div class="shop-item active" data-skin="default">
+                        <div class="item-preview skin-default-preview">🧢</div>
+                        <div class="item-name">Classic Jake</div>
+                        <div class="item-status">EQUIPPED</div>
+                    </div>
+                    <div class="shop-item" data-skin="cyber" data-cost="200">
+                        <div class="item-preview skin-cyber-preview">🎧</div>
+                        <div class="item-name">Tricky</div>
+                        <div class="item-price"><i class="fa-solid fa-coins"></i> 200</div>
+                    </div>
+                    <div class="shop-item" data-skin="ninja" data-cost="500">
+                        <div class="item-preview skin-ninja-preview">👑</div>
+                        <div class="item-name">King</div>
+                        <div class="item-price"><i class="fa-solid fa-coins"></i> 500</div>
+                    </div>
+                </div>
+
+                <button id="btn-shop-back" class="btn btn-secondary mt-15">Back to Main Menu</button>
+            </div>
+        </div>
+
+        <!-- How to Play / Controls Modal -->
+        <div id="modal-controls" class="screen-overlay hidden">
+            <div class="menu-content glass-box controls-box classic-border">
+                <h2><i class="fa-solid fa-gamepad"></i> CONTROLS GUIDE</h2>
+                <div class="controls-grid">
+                    <div class="control-card">
+                        <div class="key-combo"><i class="fa-solid fa-mouse"></i> <span class="key">Move Mouse</span></div>
+                        <div class="key-desc">Shift Left / Middle / Right Lane</div>
+                    </div>
+                    <div class="control-card">
+                        <div class="key-combo"><span class="key">A</span> / <span class="key">←</span></div>
+                        <div class="key-desc">Change Lane Left</div>
+                    </div>
+                    <div class="control-card">
+                        <div class="key-combo"><span class="key">D</span> / <span class="key">→</span></div>
+                        <div class="key-desc">Change Lane Right</div>
+                    </div>
+                    <div class="control-card">
+                        <div class="key-combo"><span class="key">Click</span> / <span class="key">W</span> / <span class="key">Space</span></div>
+                        <div class="key-desc">Jump over hurdles & onto train roofs</div>
+                    </div>
+                    <div class="control-card">
+                        <div class="key-combo"><span class="key">Right Click</span> / <span class="key">S</span> / <span class="key">↓</span></div>
+                        <div class="key-desc">Slide under overhead barriers</div>
+                    </div>
+                    <div class="control-card">
+                        <div class="key-combo"><span class="key">Double Space</span></div>
+                        <div class="key-desc">Activate Shield Hoverboard</div>
+                    </div>
+                </div>
+                <p class="chaser-tip"><i class="fa-solid fa-shield-cat"></i> <strong>Watch out!</strong> Hitting train barriers lets the Inspector & Dog catch you!</p>
+                <button id="btn-controls-close" class="btn btn-primary mt-15">GOT IT!</button>
+            </div>
+        </div>
+
+        <!-- Pause Screen -->
+        <div id="menu-pause" class="screen-overlay hidden">
+            <div class="menu-content glass-box">
+                <h2>GAME PAUSED</h2>
+                <div class="menu-actions">
+                    <button id="btn-resume" class="btn btn-primary"><i class="fa-solid fa-play"></i> RESUME</button>
+                    <button id="btn-restart" class="btn btn-secondary"><i class="fa-solid fa-rotate-right"></i> RESTART</button>
+                    <button id="btn-quit" class="btn btn-danger"><i class="fa-solid fa-house"></i> MAIN MENU</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Over Screen -->
+        <div id="menu-gameover" class="screen-overlay hidden">
+            <div class="menu-content glass-box gameover-box">
+                <div class="caught-banner">CAUGHT BY THE INSPECTOR!</div>
+                <h1 class="gameover-title">GAME OVER</h1>
+
+                <div class="results-card">
+                    <div class="res-row">
+                        <span>FINAL SCORE</span>
+                        <strong id="go-score">0</strong>
+                    </div>
+                    <div class="res-row">
+                        <span>COINS COLLECTED</span>
+                        <strong id="go-coins">+0</strong>
+                    </div>
+                    <div class="res-row highlight-row">
+                        <span>HIGH SCORE</span>
+                        <strong id="go-highscore">0</strong>
+                    </div>
+                </div>
+
+                <div id="new-highscore-badge" class="new-high-badge hidden">
+                    <i class="fa-solid fa-crown"></i> NEW HIGH SCORE!
+                </div>
+
+                <div class="menu-actions">
+                    <button id="btn-retry" class="btn btn-primary btn-pulse">
+                        <i class="fa-solid fa-rotate-right"></i> SURF AGAIN
+                    </button>
+                    <button id="btn-go-home" class="btn btn-secondary">
+                        <i class="fa-solid fa-house"></i> HOME
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+    <!-- Game Scripts -->
+    <script src="js/sound.js"></script>
+    <script src="js/game.js"></script>
+</body>
+</html>

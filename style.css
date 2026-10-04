@@ -1,0 +1,722 @@
+/* Reset & Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+}
+
+body, html {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: #0c1427;
+    font-family: 'Outfit', sans-serif;
+    color: #ffffff;
+}
+
+#game-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    display: block;
+}
+
+/* Classic Subway Surfers Styling */
+.classic-title {
+    font-family: 'Fredoka One', cursive !important;
+    font-size: 3.2rem !important;
+    color: #ffd166 !important;
+    text-shadow: 0 6px 0 #d4380d, 0 12px 25px rgba(0,0,0,0.6) !important;
+    letter-spacing: 1px;
+}
+
+.highlight-classic {
+    color: #ff4757 !important;
+    text-shadow: 0 6px 0 #9b0f19, 0 12px 25px rgba(0,0,0,0.6) !important;
+    font-size: 2.8rem !important;
+}
+
+.classic-tagline {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    color: #e2e8f0;
+    font-size: 1.05rem !important;
+}
+
+.classic-border {
+    border: 3px solid rgba(255, 209, 102, 0.6) !important;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6), inset 0 0 20px rgba(255, 209, 102, 0.2) !important;
+}
+
+/* Glassmorphism Common Styles */
+.glass-box {
+    background: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 28px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+}
+
+.screen-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(8, 12, 24, 0.65);
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.hidden {
+    opacity: 0 !important;
+    pointer-events: none !important;
+    visibility: hidden !important;
+}
+
+/* Menu Content Container */
+.menu-content {
+    width: 90%;
+    max-width: 440px;
+    padding: 34px 28px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes popIn {
+    0% { transform: scale(0.8); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* Stats Pills */
+.menu-stats {
+    display: flex;
+    gap: 12px;
+    width: 100%;
+    justify-content: center;
+}
+
+.stat-pill {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1.5px solid rgba(255, 255, 255, 0.2);
+    padding: 10px 18px;
+    border-radius: 50px;
+    font-family: 'Fredoka One', cursive;
+    font-size: 0.95rem;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.stat-pill i {
+    color: #ffd166;
+}
+
+/* Buttons */
+.menu-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+}
+
+.secondary-btn-row {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+}
+
+.btn {
+    border: none;
+    outline: none;
+    padding: 14px 24px;
+    border-radius: 18px;
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.25rem;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #ff4757 0%, #ff6b81 100%);
+    color: #ffffff;
+    box-shadow: 0 6px 0 #b32b38, 0 10px 25px rgba(255, 71, 87, 0.4);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 0 #b32b38, 0 15px 30px rgba(255, 71, 87, 0.5);
+}
+
+.btn-primary:active {
+    transform: translateY(4px);
+    box-shadow: 0 2px 0 #b32b38, 0 5px 15px rgba(255, 71, 87, 0.4);
+}
+
+.btn-secondary {
+    flex: 1;
+    background: linear-gradient(135deg, #2ed573 0%, #7bed9f 100%);
+    color: #0b381a;
+    box-shadow: 0 5px 0 #1b9e4f, 0 8px 20px rgba(46, 213, 115, 0.3);
+    font-size: 1rem;
+    padding: 12px 16px;
+}
+
+.btn-secondary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 7px 0 #1b9e4f, 0 12px 25px rgba(46, 213, 115, 0.4);
+}
+
+.btn-secondary:active {
+    transform: translateY(3px);
+    box-shadow: 0 2px 0 #1b9e4f;
+}
+
+.btn-danger {
+    background: linear-gradient(135deg, #ffa502 0%, #ff7f50 100%);
+    color: #ffffff;
+    box-shadow: 0 5px 0 #c76b00;
+}
+
+.btn-pulse {
+    animation: pulseGlow 1.8s infinite alternate;
+}
+
+@keyframes pulseGlow {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.04); }
+}
+
+/* HUD Overlay */
+#hud {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+    pointer-events: none;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.hud-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.hud-card {
+    pointer-events: auto;
+    background: rgba(15, 23, 42, 0.75);
+    backdrop-filter: blur(12px);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    padding: 8px 18px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+}
+
+.coins-card {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.5rem;
+    color: #ffd166;
+}
+
+.coin-icon {
+    color: #ffd166;
+    font-size: 1.6rem;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4));
+    animation: spinCoin 3s infinite linear;
+}
+
+@keyframes spinCoin {
+    0% { transform: rotateY(0deg); }
+    100% { transform: rotateY(360deg); }
+}
+
+.score-card {
+    flex-direction: column;
+    gap: 2px;
+    padding: 8px 24px;
+    border-radius: 22px;
+    position: relative;
+}
+
+.score-label {
+    font-size: 0.65rem;
+    font-weight: 900;
+    color: #94a3b8;
+    letter-spacing: 2px;
+}
+
+#hud-score {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.9rem;
+    color: #ffffff;
+    line-height: 1;
+}
+
+.multiplier-badge {
+    position: absolute;
+    bottom: -10px;
+    background: #ff4757;
+    color: white;
+    font-family: 'Fredoka One', cursive;
+    font-size: 0.8rem;
+    padding: 2px 10px;
+    border-radius: 12px;
+    border: 1.5px solid white;
+}
+
+.speed-card {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.05rem;
+    color: #2ed573;
+}
+
+.speed-icon {
+    color: #ffd166;
+}
+
+.top-buttons {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    gap: 8px;
+}
+
+.hoverboard-btn {
+    pointer-events: auto;
+    background: linear-gradient(135deg, #1e90ff, #70a1ff);
+    border: 2px solid white;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 50px;
+    font-family: 'Fredoka One', cursive;
+    font-size: 1rem;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(30, 144, 255, 0.4);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: transform 0.1s ease;
+}
+
+.hoverboard-btn:active {
+    transform: scale(0.92);
+}
+
+.icon-btn {
+    pointer-events: auto;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(15, 23, 42, 0.75);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255,255,255,0.2);
+    color: white;
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+}
+
+/* Active Skill Slot Buttons HUD */
+#hud-skills-bar {
+    position: absolute;
+    right: 20px;
+    bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    pointer-events: auto;
+    z-index: 10;
+}
+
+.skill-btn {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(10px);
+    border: 2px solid #ffd166;
+    box-shadow: 0 0 20px rgba(255, 209, 102, 0.4);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.2s ease;
+}
+
+.skill-btn i {
+    font-size: 1.4rem;
+    color: #ffd166;
+}
+
+.skill-btn .skill-key {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    background: #ff4757;
+    color: white;
+    font-family: 'Fredoka One', cursive;
+    font-size: 0.75rem;
+    padding: 2px 6px;
+    border-radius: 8px;
+    border: 1px solid white;
+}
+
+.skill-btn .skill-name {
+    font-size: 0.6rem;
+    font-family: 'Fredoka One', cursive;
+    color: #cbd5e1;
+    margin-top: 2px;
+}
+
+.skill-btn:hover {
+    transform: scale(1.08);
+    border-color: #2ed573;
+    box-shadow: 0 0 25px rgba(46, 213, 115, 0.6);
+}
+
+.skill-btn:active {
+    transform: scale(0.92);
+}
+
+/* Active Powerup Meters */
+#powerup-bars {
+    position: absolute;
+    left: 20px;
+    top: 90px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    pointer-events: auto;
+}
+
+.powerup-meter {
+    background: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(8px);
+    border: 1.5px solid rgba(255,255,255,0.2);
+    padding: 6px 12px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 165px;
+}
+
+.powerup-meter i {
+    font-size: 1.2rem;
+    color: #ffd166;
+}
+
+.powerup-bar-track {
+    flex: 1;
+    height: 8px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.powerup-bar-fill {
+    height: 100%;
+    width: 100%;
+    background: #2ed573;
+    transition: width 0.1s linear;
+}
+
+/* Touch Zone Overlay for Mobile/Tablet */
+#touch-controls {
+    pointer-events: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    width: 100%;
+    padding-bottom: 20px;
+}
+
+.touch-zone {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(4px);
+    border: 1.5px solid rgba(255, 255, 255, 0.15);
+    color: white;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.1rem;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    cursor: pointer;
+    touch-action: manipulation;
+}
+
+.zone-left, .zone-right {
+    width: 70px;
+    height: 120px;
+    font-size: 1.8rem;
+}
+
+.touch-center-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.zone-up, .zone-down {
+    width: 160px;
+    height: 54px;
+    gap: 8px;
+}
+
+.zone-up {
+    background: rgba(46, 213, 115, 0.15);
+    border-color: rgba(46, 213, 115, 0.4);
+}
+
+.zone-down {
+    background: rgba(255, 71, 87, 0.15);
+    border-color: rgba(255, 71, 87, 0.4);
+}
+
+@media (min-width: 900px) {
+    #touch-controls {
+        display: none;
+    }
+}
+
+/* Controls Modal */
+.controls-box {
+    max-width: 520px;
+}
+
+.controls-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    width: 100%;
+}
+
+.control-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 12px;
+    border-radius: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    align-items: center;
+}
+
+.key-combo {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+}
+
+.key {
+    background: #334155;
+    border: 1px solid #64748b;
+    border-bottom: 3px solid #1e293b;
+    color: #ffd166;
+    font-family: 'Fredoka One', cursive;
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+}
+
+.key-desc {
+    font-size: 0.85rem;
+    color: #cbd5e1;
+}
+
+.chaser-tip {
+    font-size: 0.85rem;
+    color: #ffaa00;
+    background: rgba(255, 170, 0, 0.1);
+    border: 1px solid rgba(255, 170, 0, 0.3);
+    padding: 10px 14px;
+    border-radius: 12px;
+    width: 100%;
+}
+
+/* Shop Modal */
+.shop-box {
+    max-width: 480px;
+}
+
+.shop-balance {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.2rem;
+    color: #ffd166;
+}
+
+.shop-items-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    width: 100%;
+}
+
+.shop-item {
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 12px 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.shop-item.active {
+    border-color: #2ed573;
+    background: rgba(46, 213, 115, 0.15);
+}
+
+.shop-item:hover {
+    transform: translateY(-4px);
+    border-color: #ffd166;
+}
+
+.item-preview {
+    font-size: 2.2rem;
+}
+
+.item-name {
+    font-weight: 700;
+    font-size: 0.8rem;
+    color: #f1f5f9;
+}
+
+.item-status {
+    font-family: 'Fredoka One', cursive;
+    font-size: 0.75rem;
+    color: #2ed573;
+}
+
+.item-price {
+    font-family: 'Fredoka One', cursive;
+    font-size: 0.8rem;
+    color: #ffd166;
+}
+
+.mt-15 {
+    margin-top: 15px;
+    width: 100%;
+}
+
+/* Game Over Screen */
+.gameover-box {
+    max-width: 420px;
+}
+
+.caught-banner {
+    background: #ff4757;
+    color: white;
+    font-family: 'Fredoka One', cursive;
+    font-size: 0.9rem;
+    padding: 4px 16px;
+    border-radius: 50px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    box-shadow: 0 4px 12px rgba(255, 71, 87, 0.4);
+}
+
+.gameover-title {
+    font-family: 'Fredoka One', cursive;
+    font-size: 2.5rem;
+    color: #ffffff;
+    text-shadow: 0 4px 0 #94a3b8;
+}
+
+.results-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 18px;
+    padding: 16px 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.res-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.95rem;
+    color: #94a3b8;
+}
+
+.res-row strong {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.2rem;
+    color: white;
+}
+
+.highlight-row {
+    border-top: 1px dashed rgba(255,255,255,0.15);
+    padding-top: 10px;
+}
+
+.highlight-row strong {
+    color: #ffd166;
+}
+
+.new-high-badge {
+    background: linear-gradient(135deg, #ffd166, #ffaa00);
+    color: #5c3d00;
+    font-family: 'Fredoka One', cursive;
+    padding: 8px 18px;
+    border-radius: 50px;
+    font-size: 1rem;
+    animation: bounce 0.8s infinite alternate;
+}
+
+@keyframes bounce {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-6px); }
+}
